@@ -1,4 +1,4 @@
-import { useLoaderData, type LoaderFunctionArgs } from "react-router";
+import { useLoaderData } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { getSupabaseServerClient } from "~/lib/supabase.server";
 import { heading, linkText, text } from "~/styles/text.styles";
@@ -11,9 +11,14 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader({ request, context }: Route.LoaderArgs) {
   const headers = new Headers();
-  const supabase = getSupabaseServerClient({ request, headers });
+  const supabase = getSupabaseServerClient({
+    request,
+    headers,
+    supabaseUrl: context.cloudflare.env.SUPABASE_URL,
+    supabaseAnonKey: context.cloudflare.env.SUPABASE_ANON_KEY,
+  });
 
   const { data: bookmarks } = await supabase
     .from("Bookmarks")

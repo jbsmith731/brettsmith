@@ -3,20 +3,20 @@ import {
   parseCookieHeader,
   serializeCookieHeader,
 } from "@supabase/ssr";
-import { env } from "cloudflare:workers";
 
 type GetSupabaseServerClientOptions = {
   request: Request;
   headers: Headers;
+  supabaseUrl: string;
+  supabaseAnonKey: string;
 };
 
 export function getSupabaseServerClient({
   request,
   headers,
+  supabaseUrl,
+  supabaseAnonKey,
 }: GetSupabaseServerClientOptions) {
-  const supabaseUrl = env.SUPABASE_URL;
-  const supabaseAnonKey = env.SUPABASE_ANON_KEY;
-
   return createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
       getAll() {
