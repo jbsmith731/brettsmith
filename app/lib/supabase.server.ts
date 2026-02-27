@@ -17,6 +17,10 @@ export function getSupabaseServerClient({
   supabaseUrl,
   supabaseAnonKey,
 }: GetSupabaseServerClientOptions) {
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error("Supabase URL and Anon Key must be provided");
+  }
+
   return createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
       getAll() {
