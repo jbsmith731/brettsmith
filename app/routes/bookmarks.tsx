@@ -44,7 +44,7 @@ export default function Bookmarks() {
               rel="noopener noreferrer"
               className={twMerge(
                 linkText({ color: "primary" }),
-                "text-xl font-semibold link-overlay",
+                "text-xl font-medium link-overlay",
               )}
             >
               {bookmark.title} <span aria-hidden="true">↗</span>
