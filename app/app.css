@@ -1,15 +1,115 @@
 @import "tailwindcss" source(".");
 
-@theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+@font-face {
+  font-family: "NeueMontreal";
+  src: url("/fonts/PPNeueMontreal-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
 }
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
+@font-face {
+  font-family: "NeueMontreal";
+  src: url("/fonts/PPNeueMontreal-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+@font-face {
+  font-family: "NeueMontreal";
+  src: url("/fonts/PPNeueMontreal-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@theme {
+  --font-sans:
+    "NeueMontreal", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  /* Ink — dark surfaces and text */
+  --color-ink-950: #0a0a0a;
+  --color-ink-900: #121212;
+  --color-ink-800: #1a1a1a;
+  --color-ink-700: #242424;
+  --color-ink-600: #2e2e2e;
+  --color-ink-500: #3a3a3a;
+  --color-ink-400: #555555;
+
+  /* Paper — warm light backgrounds */
+  --color-paper-50: #fbfaf8;
+  --color-paper-100: #f3efe7;
+  --color-paper-200: #e4ded4;
+  --color-paper-300: #d5cfc4;
+  --color-paper-400: #beb7ac;
+
+  /* Stone — neutral borders and dividers */
+  --color-stone-100: #eae8e5;
+  --color-stone-200: #d8d5d0;
+  --color-stone-300: #c8c4be;
+  --color-stone-400: #b2ada6;
+
+  /* Signal — primary accent (orange) */
+  --color-signal-400: #ff6a3d;
+  --color-signal-500: #f2471e;
+  --color-signal-600: #d93f1a;
+  --color-signal-700: #b6351b;
+  --color-signal-800: #8e2c18;
+
+  /* Danger — errors and destructive actions (red) */
+  --color-danger-500: #c42020;
+  --color-danger-600: #a01818;
+  --color-danger-700: #7d1313;
+
+  /* Muted — secondary text and disabled states */
+  --color-muted-400: #6e6e6e;
+  --color-muted-300: #5a5a5a;
+  --color-muted-200: #464646;
+
+  /* Semantic aliases */
+  --color-bg: var(--color-paper-50);
+  --color-surface: var(--color-paper-100);
+  --color-border: var(--color-stone-200);
+  --color-text: var(--color-ink-900);
+  --color-text-muted: var(--color-muted-400);
+  --color-accent: var(--color-signal-500);
+  --color-error: var(--color-danger-500);
+}
+
+body {
+  /* @apply m-0; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a,
+button {
+  @apply cursor-pointer;
+}
+
+@utility link-box {
+  position: relative;
+
+  /* Allow links other than .linkOverlay to be interactive */
+  :where(a:not(.link-overlay), abbr) {
+    position: relative;
+    z-index: 1;
   }
+}
+
+@utility link-overlay {
+  position: static;
+
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    cursor: inherit;
+    inset: 0;
+    z-index: 0;
+  }
+}
+
+@utility container {
+  @apply mx-auto max-w-none;
+  width: min(theme(maxWidth.3xl), 100vw - theme(spacing.8));
 }

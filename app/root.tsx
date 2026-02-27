@@ -6,7 +6,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-
+import Header from "./components/Header";
+import { Footer } from "./components/Footer";
 import type { Route } from "./+types/root";
 import "./app.css";
 
@@ -23,6 +24,10 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+export const meta: Route.MetaFunction = () => [
+  { name: "robots", content: "noindex, nofollow" },
+];
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -32,8 +37,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="bg-paper-100 h-full min-h-dvh grid grid-rows-[auto_1fr_auto]">
+        <Header />
         {children}
+        <Footer />
         <ScrollRestoration />
         <Scripts />
       </body>
