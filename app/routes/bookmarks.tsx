@@ -37,7 +37,7 @@ export default function Bookmarks() {
 
       <ul className="grid gap-4 md:gap-8">
         {bookmarks?.map((bookmark) => (
-          <li key={bookmark.url} className="link-box grid md:gap-0.5">
+          <li key={bookmark.url} className="link-box grid gap-0.5">
             <a
               href={bookmark.url}
               target="_blank"
@@ -49,7 +49,12 @@ export default function Bookmarks() {
             >
               {bookmark.title} <span aria-hidden="true">↗</span>
             </a>
-            <p className={text({ color: "secondary" })}>
+            <p
+              className={text({
+                color: "secondary",
+                className: "max-sm:leading-snug",
+              })}
+            >
               {bookmark.description}
             </p>
           </li>

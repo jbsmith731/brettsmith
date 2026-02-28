@@ -32,9 +32,12 @@ export default function Home() {
             >
               <span className={text({ color: "secondary" })}>{year}</span>
 
-              <ul className="grid gap-1.5 md:gap-2">
+              <ul className="grid gap-2.5 md:gap-4">
                 {updates.map(({ update }, index) => (
-                  <li key={index} className={text()}>
+                  <li
+                    key={index}
+                    className={text({ className: "leading-snug" })}
+                  >
                     {update}
                   </li>
                 ))}

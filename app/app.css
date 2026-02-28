@@ -111,5 +111,5 @@ button {
 
 @utility container {
   @apply mx-auto max-w-none;
-  width: min(theme(maxWidth.3xl), 100vw - theme(spacing.8));
+  width: min(theme(maxWidth.3xl), 100vw - theme(spacing.10));
 }
