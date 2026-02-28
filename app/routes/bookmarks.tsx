@@ -3,11 +3,16 @@ import { twMerge } from "tailwind-merge";
 import { getSupabaseServerClient } from "~/lib/supabase.server";
 import { heading, linkText, text } from "~/styles/text.styles";
 import type { Route } from "./+types/bookmarks";
+import { createMetaTitle } from "~/helpers/seo.helpers";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Bookmarks -Brett Smith" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: createMetaTitle("Bookmarks") },
+    {
+      name: "description",
+      content:
+        "A curated collection of bookmarks featuring useful links, tools, and resources across design, development, and product work.",
+    },
   ];
 }
 

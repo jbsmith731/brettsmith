@@ -1,11 +1,16 @@
 import { heading, label, text } from "~/styles/text.styles";
 import type { Route } from "./+types/home";
 import { twMerge } from "tailwind-merge";
+import { TITLE } from "~/constants/seo.constants";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Brett Smith" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: TITLE },
+    {
+      name: "description",
+      content:
+        "Software engineer interested in TypeScript, React, and Design Systems. Currently working as a Senior Frontend Engineer at BreakLine.",
+    },
   ];
 }
 
