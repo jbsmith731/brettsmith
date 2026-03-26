@@ -3,6 +3,13 @@ import type { Route } from "./+types/home";
 import { twMerge } from "tailwind-merge";
 import { TITLE } from "~/constants/seo.constants";
 
+export function headers(): HeadersInit {
+  return {
+    // cache for 1 hour, revalidate up to 24 hours
+    "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+  };
+}
+
 export function meta({}: Route.MetaArgs) {
   return [
     { title: TITLE },
@@ -12,10 +19,6 @@ export function meta({}: Route.MetaArgs) {
         "Software engineer interested in TypeScript, React, and Design Systems. Currently working as a Senior Frontend Engineer at BreakLine.",
     },
   ];
-}
-
-export function loader({ context }: Route.LoaderArgs) {
-  return { message: context.cloudflare.env.VALUE_FROM_CLOUDFLARE };
 }
 
 export default function Home() {
