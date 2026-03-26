@@ -66,11 +66,17 @@ interface Updates {
 
 const UPDATES_V2: Updates[] = [
   {
+    year: 2026,
+    updates: [
+      { update: "Launch improved BreakLine candidate invitation flow" },
+      {
+        update: "Launch BreakLine Partners microsite",
+      },
+    ],
+  },
+  {
     year: 2025,
     updates: [
-      {
-        update: "Launch BreakLine Partners Microsite",
-      },
       {
         update: "New role as Senior Frontend Engineer at BreakLine",
       },

@@ -33,16 +33,16 @@ const SOCIAL_LINKS = [
     url: "https://github.com/jbsmith731",
     name: "GitHub",
   },
-  {
-    url: "https://twitter.com/_brettsmith",
-    name: "Twitter",
-  },
+  // {
+  //   url: "https://twitter.com/_brettsmith",
+  //   name: "Twitter",
+  // },
   {
     url: "https://www.linkedin.com/in/brett--smith/",
     name: "LinkedIn",
   },
-  {
-    url: "https://instagram.com/jbsmith731",
-    name: "Instagram",
-  },
+  // {
+  //   url: "https://instagram.com/jbsmith731",
+  //   name: "Instagram",
+  // },
 ];
