@@ -1,7 +1,6 @@
 import { twMerge } from 'tailwind-merge';
 import { TITLE } from '~/constants/seo.constants';
 import { heading, label, text } from '~/styles/text.styles';
-import type { Route } from './+types/home';
 
 export function headers(): HeadersInit {
   return {
@@ -10,69 +9,65 @@ export function headers(): HeadersInit {
   };
 }
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: TITLE },
-    {
-      name: 'description',
-      content:
-        'Software engineer interested in TypeScript, React, and Design Systems. Currently working as a Senior Frontend Engineer at BreakLine.',
-    },
-  ];
-}
-
 export default function Home() {
   return (
-    <main className="container my-16 md:my-20 grid gap-20 md:gap-24">
-      <h1 className={heading({ level: 'h2', weight: 'regular' })}>
-        Hi, I'm Brett. I'm a Software Engineer building products with React,
-        TypeScript, & Node.js
-      </h1>
+    <>
+      <title>{TITLE}</title>
+      <meta
+        name="description"
+        content="Software engineer interested in TypeScript, React, and Design Systems. Currently working as a Senior Frontend Engineer at BreakLine."
+      />
+      <main className="container my-16 md:my-20 grid gap-20 md:gap-24">
+        <h1 className={heading({ level: 'h2', weight: 'regular' })}>
+          Hi, I'm Brett. I'm a Software Engineer building products with React,
+          TypeScript, & Node.js
+        </h1>
 
-      <section>
-        <h2 className={twMerge(label, 'mb-6')}>Updates</h2>
+        <section>
+          <h2 className={twMerge(label, 'mb-6')}>Updates</h2>
 
-        <ul className="grid gap-8">
-          {UPDATES_V2.map(({ year, updates }) => (
-            <li
-              key={year}
-              className="grid gap-3 md:gap-6 sm:grid-cols-[120px_1fr]"
-            >
-              <span
-                className={text({
-                  color: 'secondary',
-                  className: 'leading-snug',
-                })}
+          <ul className="grid gap-8">
+            {UPDATES_V2.map(({ year, updates }) => (
+              <li
+                key={year}
+                className="grid gap-3 md:gap-6 sm:grid-cols-[120px_1fr]"
               >
-                {year}
-              </span>
+                <span
+                  className={text({
+                    color: 'secondary',
+                    className: 'leading-snug',
+                  })}
+                >
+                  {year}
+                </span>
 
-              <ul className="grid gap-2.5 md:gap-4">
-                {updates.map(({ update, suffix, type }, index) => (
-                  <li key={index} className="relative">
-                    {type === UPDATE_TYPE.ROLE && (
-                      <div className="absolute -left-2.75 top-2.25 size-1 rounded-full bg-accent" />
-                    )}
-
-                    <p className={text({ className: 'leading-snug' })}>
-                      {update}
-                      {suffix && (
-                        <>
-                          {' '}
-                          <span className="text-muted-400 text-sm">
-                            ({suffix})
-                          </span>
-                        </>
+                <ul className="grid gap-2.5 md:gap-4">
+                  {updates.map(({ update, suffix, type }, index) => (
+                    <li key={index} className="relative">
+                      {type === UPDATE_TYPE.ROLE && (
+                        <div className="absolute -left-2.75 top-2.25 size-1 rounded-full bg-accent" />
                       )}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </main>
+
+                      <p className={text({ className: 'leading-snug' })}>
+                        {update}
+                        {suffix && (
+                          <>
+                            {' '}
+                            <span className="text-muted-400 text-sm">
+                              ({suffix})
+                            </span>
+                          </>
+                        )}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </main>
+    </>
   );
 }
 

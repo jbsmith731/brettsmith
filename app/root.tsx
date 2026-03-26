@@ -11,24 +11,25 @@ import './app.css';
 import { Footer } from './components/Footer';
 import Header from './components/Header';
 
-export const meta: Route.MetaFunction = () => [
-  { name: 'robots', content: 'noindex, nofollow' },
-];
-
-export const links: Route.LinksFunction = () => [
-  {
-    rel: 'icon',
-    type: 'image/svg+xml',
-    href: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23f2471e'/%3E%3C/svg%3E",
-  },
-];
-
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" />
+        <link
+          rel="preload"
+          href="/fonts/PPNeueMontreal-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23f2471e'/%3E%3C/svg%3E"
+        />
         <Meta />
         <Links />
       </head>
