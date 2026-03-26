@@ -68,8 +68,8 @@ export const linkText = cva('transition-colors underline-offset-4', {
       hover: 'hover:underline',
     },
     color: {
-      action: 'text-signal-500 hover:text-signal-700 active:text-signal-700',
-      primary: 'text-ink-900 hover:text-signal-500 active:text-signal-500',
+      action: 'text-accent hover:text-signal-700 active:text-signal-700',
+      primary: 'text-ink-900 hover:text-accent active:text-accent',
       inherit: 'text-inherit',
     },
   },

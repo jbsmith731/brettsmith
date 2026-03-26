@@ -10,7 +10,7 @@ export default function Header() {
         <Link
           to="/"
           className={twMerge(
-            'text-ink-950 hover:text-ink-500/95 transition-colors',
+            'text-ink-950 hover:text-ink-500/92 transition-colors',
             'after:-inset-2 after:absolute relative',
           )}
         >
@@ -27,7 +27,7 @@ export default function Header() {
                   linkText({
                     color: 'primary',
                   }),
-                  'aria-[current]:line-through decoration-signal-500',
+                  'aria-[current]:line-through decoration-accent',
                 )}
                 prefetch="intent"
               >
