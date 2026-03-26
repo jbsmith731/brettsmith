@@ -1,4 +1,5 @@
 import { twMerge } from 'tailwind-merge';
+import { Main } from '~/components/Main';
 import { TITLE } from '~/constants/seo.constants';
 import { heading, label, text } from '~/styles/text.styles';
 
@@ -17,7 +18,7 @@ export default function Home() {
         name="description"
         content="Software engineer interested in TypeScript, React, and Design Systems. Currently working as a Senior Frontend Engineer at BreakLine."
       />
-      <main className="container my-16 md:my-20 grid gap-20 md:gap-24">
+      <Main className="container grid gap-20 md:gap-24">
         <h1 className={heading({ level: 'h2', weight: 'regular' })}>
           Hi, I'm Brett. I'm a Software Engineer building products with React,
           TypeScript, & Node.js
@@ -66,7 +67,7 @@ export default function Home() {
             ))}
           </ul>
         </section>
-      </main>
+      </Main>
     </>
   );
 }

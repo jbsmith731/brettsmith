@@ -1,5 +1,6 @@
 import { data, useLoaderData } from 'react-router';
 import { twMerge } from 'tailwind-merge';
+import { Main } from '~/components/Main';
 import { createMetaTitle } from '~/helpers/seo.helpers';
 import { getSupabaseServerClient } from '~/lib/supabase.server';
 import { heading, linkText, text } from '~/styles/text.styles';
@@ -39,7 +40,7 @@ export default function Bookmarks() {
         name="description"
         content="A curated collection of bookmarks featuring useful links, tools, and resources across design, development, and product work."
       />
-      <main className="container grid gap-12 my-8">
+      <Main className="container grid gap-12">
         <h1 className={heading({ level: 'h1', weight: 'regular' })}>
           Bookmarks
         </h1>
@@ -69,7 +70,7 @@ export default function Bookmarks() {
             </li>
           ))}
         </ul>
-      </main>
+      </Main>
     </>
   );
 }

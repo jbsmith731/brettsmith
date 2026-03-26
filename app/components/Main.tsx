@@ -1,15 +1,12 @@
 import { twMerge } from 'tailwind-merge';
 
-export function MainLayout({
+export function Main({
   children,
   className,
   ...rest
 }: React.ComponentPropsWithRef<'main'>) {
   return (
-    <main
-      {...rest}
-      className={twMerge('max-sm:px-4 sm:max-w-3xl mx-auto', className)}
-    >
+    <main {...rest} className={twMerge('my-16 md:my-20', className)}>
       {children}
     </main>
   );
