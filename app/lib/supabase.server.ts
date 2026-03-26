@@ -3,6 +3,7 @@ import {
   parseCookieHeader,
   serializeCookieHeader,
 } from '@supabase/ssr';
+import type { Database } from '~/types/database.types';
 
 type GetSupabaseServerClientOptions = {
   request: Request;
@@ -21,7 +22,7 @@ export function getSupabaseServerClient({
     throw new Error('Supabase URL and Anon Key must be provided');
   }
 
-  return createServerClient(supabaseUrl, supabaseAnonKey, {
+  return createServerClient<Database>(supabaseUrl, supabaseAnonKey, {
     cookies: {
       getAll() {
         return (
