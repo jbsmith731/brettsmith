@@ -105,12 +105,12 @@ const UPDATES_V2: Updates[] = [
     year: 2025,
     updates: [
       {
-        update: 'Launch custom Audible Marketing Figma plugin',
-        type: UPDATE_TYPE.PROJECT,
-      },
-      {
         update: 'New role as Senior Frontend Engineer at BreakLine',
         type: UPDATE_TYPE.ROLE,
+      },
+      {
+        update: "Launch internal Figma plugin for Audible's marketing team",
+        type: UPDATE_TYPE.PROJECT,
       },
     ],
   },
@@ -122,7 +122,8 @@ const UPDATES_V2: Updates[] = [
         type: UPDATE_TYPE.ROLE,
       },
       {
-        update: 'Launch custom Audible Catalog Figma plugin',
+        update:
+          'Launch Figma plugin to browse and place Audible catalog content directly in designs',
         type: UPDATE_TYPE.PROJECT,
       },
       {
@@ -225,7 +226,7 @@ const UPDATES_V2: Updates[] = [
     year: 2018,
     updates: [
       {
-        update: 'Promoted Lead Frontend Developer at Elegant Seagulls',
+        update: 'Promoted to Lead Frontend Developer at Elegant Seagulls',
         type: UPDATE_TYPE.ROLE,
       },
       {
