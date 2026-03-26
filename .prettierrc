@@ -16,6 +16,5 @@
   "useTabs": false,
   "bracketSameLine": false,
   "singleAttributePerLine": false,
-  "pluginSearchDirs": false,
   "plugins": ["prettier-plugin-organize-imports"]
 }

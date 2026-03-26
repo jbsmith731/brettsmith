@@ -1,13 +1,13 @@
-import { NotFound as NotFoundPrimitive } from "~/components/errors/NotFound";
-import type { Route } from "./+types/not-found";
-import { createMetaTitle } from "~/helpers/seo.helpers";
+import { NotFound as NotFoundPrimitive } from '~/components/errors/NotFound';
+import { createMetaTitle } from '~/helpers/seo.helpers';
+import type { Route } from './+types/not-found';
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: createMetaTitle("Not Found") },
+    { title: createMetaTitle('Not Found') },
     {
-      name: "robots",
-      content: "noindex, nofollow",
+      name: 'robots',
+      content: 'noindex, nofollow',
     },
   ];
 }

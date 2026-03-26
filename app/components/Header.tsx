@@ -1,7 +1,7 @@
-import { linkText } from "~/styles/text.styles";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink } from 'react-router';
+import { linkText } from '~/styles/text.styles';
 
-import { twMerge } from "tailwind-merge";
+import { twMerge } from 'tailwind-merge';
 
 export default function Header() {
   return (
@@ -10,8 +10,8 @@ export default function Header() {
         <Link
           to="/"
           className={twMerge(
-            "text-ink-950 hover:text-ink-500/95 transition-colors",
-            "after:-inset-2 after:absolute relative",
+            'text-ink-950 hover:text-ink-500/95 transition-colors',
+            'after:-inset-2 after:absolute relative',
           )}
         >
           <Logo />
@@ -25,9 +25,9 @@ export default function Header() {
                 to="/bookmarks"
                 className={twMerge(
                   linkText({
-                    color: "primary",
+                    color: 'primary',
                   }),
-                  "aria-[current]:line-through decoration-signal-500",
+                  'aria-[current]:line-through decoration-signal-500',
                 )}
                 prefetch="intent"
               >
@@ -37,7 +37,7 @@ export default function Header() {
             <li>
               <a
                 href="mailto:hi@brettsmith.me"
-                className={linkText({ color: "primary" })}
+                className={linkText({ color: 'primary' })}
               >
                 Contact
               </a>

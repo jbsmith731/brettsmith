@@ -1,24 +1,24 @@
-import { data, useLoaderData } from "react-router";
-import { twMerge } from "tailwind-merge";
-import { getSupabaseServerClient } from "~/lib/supabase.server";
-import { heading, linkText, text } from "~/styles/text.styles";
-import type { Route } from "./+types/bookmarks";
-import { createMetaTitle } from "~/helpers/seo.helpers";
+import { data, useLoaderData } from 'react-router';
+import { twMerge } from 'tailwind-merge';
+import { createMetaTitle } from '~/helpers/seo.helpers';
+import { getSupabaseServerClient } from '~/lib/supabase.server';
+import { heading, linkText, text } from '~/styles/text.styles';
+import type { Route } from './+types/bookmarks';
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: createMetaTitle("Bookmarks") },
+    { title: createMetaTitle('Bookmarks') },
     {
-      name: "description",
+      name: 'description',
       content:
-        "A curated collection of bookmarks featuring useful links, tools, and resources across design, development, and product work.",
+        'A curated collection of bookmarks featuring useful links, tools, and resources across design, development, and product work.',
     },
   ];
 }
 
 export function headers() {
   return {
-    "Cache-Control": "public, s-maxage=600, stale-while-revalidate=86400",
+    'Cache-Control': 'public, s-maxage=600, stale-while-revalidate=86400',
   };
 }
 
@@ -32,9 +32,9 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   });
 
   const { data: bookmarks } = await supabase
-    .from("Bookmarks")
-    .select("title, url, description")
-    .order("id", { ascending: false })
+    .from('Bookmarks')
+    .select('title, url, description')
+    .order('id', { ascending: false })
     .limit(100);
 
   return data({ bookmarks }, { headers: responseHeaders });
@@ -45,7 +45,7 @@ export default function Bookmarks() {
 
   return (
     <main className="container grid gap-12 my-8">
-      <h1 className={heading({ level: "h1", weight: "regular" })}>Bookmarks</h1>
+      <h1 className={heading({ level: 'h1', weight: 'regular' })}>Bookmarks</h1>
 
       <ul className="grid gap-4 md:gap-8">
         {bookmarks?.map((bookmark) => (
@@ -55,16 +55,16 @@ export default function Bookmarks() {
               target="_blank"
               rel="noopener noreferrer"
               className={twMerge(
-                linkText({ color: "primary" }),
-                "text-xl font-medium link-overlay",
+                linkText({ color: 'primary' }),
+                'text-xl font-medium link-overlay',
               )}
             >
               {bookmark.title} <span aria-hidden="true">↗</span>
             </a>
             <p
               className={text({
-                color: "secondary",
-                className: "max-sm:leading-snug",
+                color: 'secondary',
+                className: 'max-sm:leading-snug',
               })}
             >
               {bookmark.description}
