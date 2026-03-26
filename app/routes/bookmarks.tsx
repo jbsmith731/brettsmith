@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router";
+import { data, useLoaderData } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { getSupabaseServerClient } from "~/lib/supabase.server";
 import { heading, linkText, text } from "~/styles/text.styles";
@@ -16,11 +16,17 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
+export function headers() {
+  return {
+    "Cache-Control": "public, s-maxage=600, stale-while-revalidate=86400",
+  };
+}
+
 export async function loader({ request, context }: Route.LoaderArgs) {
-  const headers = new Headers();
+  const responseHeaders = new Headers();
   const supabase = getSupabaseServerClient({
     request,
-    headers,
+    headers: responseHeaders,
     supabaseUrl: context.cloudflare.env.SUPABASE_URL,
     supabaseAnonKey: context.cloudflare.env.SUPABASE_ANON_KEY,
   });
@@ -28,9 +34,10 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   const { data: bookmarks } = await supabase
     .from("Bookmarks")
     .select("title, url, description")
-    .order("id", { ascending: false });
+    .order("id", { ascending: false })
+    .limit(100);
 
-  return { bookmarks };
+  return data({ bookmarks }, { headers: responseHeaders });
 }
 
 export default function Bookmarks() {
