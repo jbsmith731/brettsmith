@@ -53,7 +53,7 @@ export default function Home() {
                         {suffix && (
                           <>
                             {' '}
-                            <span className="text-muted-400 text-sm">
+                            <span className="text-text-muted text-sm">
                               ({suffix})
                             </span>
                           </>

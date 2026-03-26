@@ -8,18 +8,18 @@ export function Input({ className, ...rest }: InputProps) {
       className={twMerge(
         [
           'flex h-10 w-full rounded-md px-3 text-sm',
-          'bg-paper-100 text-ink-900 placeholder:text-muted-400',
-          'border border-ink-600/20',
+          'bg-surface text-text-primary placeholder:text-text-muted',
+          'border border-border/60',
           'transition-colors duration-150',
 
           // hover
-          'hover:border-ink-600/40',
+          'hover:border-border',
 
           // focus (quiet editorial)
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink-600/30 focus-visible:border-ink-700',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border focus-visible:border-ink-700',
 
           // error (via aria-invalid or data-invalid)
-          'aria-invalid:border-danger-500 aria-invalid:focus-visible:ring-danger-500/40',
+          'aria-invalid:border-error aria-invalid:focus-visible:ring-error/40',
 
           // disabled
           'disabled:cursor-not-allowed disabled:opacity-60 disabled:bg-paper-200',

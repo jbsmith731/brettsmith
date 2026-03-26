@@ -15,8 +15,8 @@ export const text = cva([], {
       semibold: 'font-semibold',
     },
     color: {
-      primary: 'text-ink-900',
-      secondary: 'text-muted-400',
+      primary: 'text-text-primary',
+      secondary: 'text-text-muted',
       tertiary: 'text-muted-300',
     },
   },
@@ -46,8 +46,8 @@ export const heading = cva('tracking-tight', {
     },
     color: {
       primary: 'text-ink-950',
-      secondary: 'text-ink-900',
-      tertiary: 'text-muted-400',
+      secondary: 'text-text-primary',
+      tertiary: 'text-text-muted',
     },
   },
   defaultVariants: {
@@ -69,7 +69,7 @@ export const linkText = cva('transition-colors underline-offset-4', {
     },
     color: {
       action: 'text-accent hover:text-signal-700 active:text-signal-700',
-      primary: 'text-ink-900 hover:text-accent active:text-accent',
+      primary: 'text-text-primary hover:text-accent active:text-accent',
       inherit: 'text-inherit',
     },
   },

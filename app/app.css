@@ -69,14 +69,13 @@
   --color-bg: var(--color-paper-50);
   --color-surface: var(--color-paper-100);
   --color-border: var(--color-stone-200);
-  --color-text: var(--color-ink-900);
+  --color-text-primary: var(--color-ink-900);
   --color-text-muted: var(--color-muted-400);
   --color-accent: var(--color-signal-500);
   --color-error: var(--color-danger-500);
 }
 
 body {
-  /* @apply m-0; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

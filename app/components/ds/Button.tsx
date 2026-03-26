@@ -55,8 +55,8 @@ export const buttonVariants = cva(
         //   "bg-signal-700 text-paper-100 hover:bg-signal-800 active:bg-signal-800",
         primary: 'bg-ink-800 text-paper-100 hover:bg-ink-500 active:bg-ink-500',
         outline:
-          'border border-ink-600/60 text-ink-900 hover:bg-paper-200 active:bg-paper-300',
-        ghost: 'text-ink-900 hover:bg-paper-200 active:bg-paper-300',
+          'border border-border text-text-primary hover:bg-paper-200 active:bg-paper-300',
+        ghost: 'text-text-primary hover:bg-paper-200 active:bg-paper-300',
         link: 'text-signal-700 underline-offset-4 hover:underline',
         destructive:
           'bg-danger-500 text-paper-100 hover:bg-danger-600 active:bg-danger-700',
