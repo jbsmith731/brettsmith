@@ -15,6 +15,14 @@ export const meta: Route.MetaFunction = () => [
   { name: 'robots', content: 'noindex, nofollow' },
 ];
 
+export const links: Route.LinksFunction = () => [
+  {
+    rel: 'icon',
+    type: 'image/svg+xml',
+    href: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23f2471e'/%3E%3C/svg%3E",
+  },
+];
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
