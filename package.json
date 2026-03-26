@@ -5,6 +5,7 @@
   "scripts": {
     "build": "react-router build",
     "cf-typegen": "wrangler types",
+    "db:local-types": "SUPABASE_ACCESS_TOKEN=$(grep '^SUPABASE_ACCESS_TOKEN=' .env.local | cut -d= -f2-) supabase gen types typescript --project-id $(grep '^SUPABASE_PROJECT_ID=' .env.local | cut -d= -f2-) --schema public > app/types/database.types.ts",
     "deploy": "npm run build && wrangler deploy",
     "dev": "react-router dev",
     "postinstall": "npm run cf-typegen",
@@ -31,6 +32,7 @@
     "@types/react-dom": "^19.2.3",
     "prettier": "3.8.1",
     "prettier-plugin-organize-imports": "^4.3.0",
+    "supabase": "^2.84.4",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2",
     "vite": "^7.1.7",
