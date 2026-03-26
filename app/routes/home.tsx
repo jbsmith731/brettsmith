@@ -104,6 +104,11 @@ const UPDATES_V2: Updates[] = [
         update: 'Launch BreakLine Partners microsite',
         type: UPDATE_TYPE.PROJECT,
       },
+      {
+        update:
+          'Launch improved BreakLine partner and staff management dashboards',
+        type: UPDATE_TYPE.PROJECT,
+      },
     ],
   },
   {
