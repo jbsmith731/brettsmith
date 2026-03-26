@@ -51,13 +51,18 @@ export default function Home() {
                 {updates.map(({ update, suffix, type }, index) => (
                   <li key={index} className="relative">
                     {type === UPDATE_TYPE.ROLE && (
-                      <div className="absolute -left-2.5 top-2.25 size-1 rounded-full bg-accent" />
+                      <div className="absolute -left-2.75 top-2.25 size-1 rounded-full bg-accent" />
                     )}
 
                     <p className={text({ className: 'leading-snug' })}>
                       {update}
                       {suffix && (
-                        <span className="text-muted-400"> ({suffix})</span>
+                        <>
+                          {' '}
+                          <span className="text-muted-400 text-sm">
+                            ({suffix})
+                          </span>
+                        </>
                       )}
                     </p>
                   </li>
