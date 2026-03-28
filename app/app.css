@@ -7,24 +7,34 @@
   font-style: normal;
 }
 
-@font-face {
+/* @font-face {
   font-family: 'NeueMontreal';
   src: url('/fonts/PPNeueMontreal-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
-}
+} */
 
 @font-face {
+  font-family: 'Fragment Mono';
+  src: url('/fonts/PPFragmentMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* @font-face {
   font-family: 'NeueMontreal';
   src: url('/fonts/PPNeueMontreal-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
-}
+} */
 
 @theme {
   --font-sans:
     'NeueMontreal', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-mono:
+    'Fragment Mono', ui-monospace, SF Mono, SF Mono Regular, Consolas,
+    'Liberation Mono', Menlo, Courier, monospace;
 
   /* Ink — dark surfaces and text */
   --color-ink-950: #0a0a0a;
@@ -68,6 +78,7 @@
   /* Semantic aliases */
   --color-bg: var(--color-paper-50);
   --color-surface: var(--color-paper-100);
+  --color-border-soft: var(--color-stone-100);
   --color-border: var(--color-stone-200);
   --color-text-primary: var(--color-ink-900);
   --color-text-muted: var(--color-muted-400);

@@ -1,3 +1,4 @@
+import type { AnyFieldApi } from '@tanstack/react-form';
 import { twMerge } from 'tailwind-merge';
 
 interface InputProps extends React.ComponentPropsWithRef<'input'> {}
@@ -9,7 +10,7 @@ export function Input({ className, ...rest }: InputProps) {
         [
           'flex h-10 w-full rounded-md px-3 text-sm',
           'bg-surface text-text-primary placeholder:text-text-muted',
-          'border border-border/60',
+          'border border-border',
           'transition-colors duration-150',
 
           // hover
@@ -29,4 +30,15 @@ export function Input({ className, ...rest }: InputProps) {
       {...rest}
     />
   );
+}
+
+export function getInputProps(field: AnyFieldApi) {
+  return {
+    id: field.name,
+    name: field.name,
+    value: field.state.value,
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+      field.handleChange(e.target.value),
+    'aria-invalid': !field.state.meta.isValid,
+  };
 }
