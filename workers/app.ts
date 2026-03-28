@@ -1,6 +1,7 @@
-import { createRequestHandler } from "react-router";
+import { createRequestHandler, RouterContextProvider } from 'react-router';
+import { cloudflareContext } from '~/context';
 
-declare module "react-router" {
+declare module 'react-router' {
   export interface AppLoadContext {
     cloudflare: {
       env: Env;
@@ -10,14 +11,14 @@ declare module "react-router" {
 }
 
 const requestHandler = createRequestHandler(
-  () => import("virtual:react-router/server-build"),
-  import.meta.env.MODE
+  () => import('virtual:react-router/server-build'),
+  import.meta.env.MODE,
 );
 
 export default {
   async fetch(request, env, ctx) {
-    return requestHandler(request, {
-      cloudflare: { env, ctx },
-    });
+    const rrCtx = new RouterContextProvider();
+    rrCtx.set(cloudflareContext, { env, ctx }); // rrCtx is the map
+    return requestHandler(request, rrCtx);
   },
 } satisfies ExportedHandler<Env>;

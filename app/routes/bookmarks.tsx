@@ -1,6 +1,7 @@
 import { data, useLoaderData } from 'react-router';
 import { twMerge } from 'tailwind-merge';
 import { Main } from '~/components/Main';
+import { cloudflareContext } from '~/context';
 import { createMetaTitle } from '~/helpers/seo.helpers';
 import { getSupabaseServerClient } from '~/lib/supabase.server';
 import { heading, linkText, text } from '~/styles/text.styles';
@@ -14,7 +15,8 @@ export function headers() {
 
 export async function loader({ request, context }: Route.LoaderArgs) {
   const responseHeaders = new Headers();
-  const { SUPABASE_ANON_KEY, SUPABASE_URL } = context.cloudflare.env;
+  const { SUPABASE_ANON_KEY, SUPABASE_URL } =
+    context.get(cloudflareContext).env;
 
   const supabase = getSupabaseServerClient({
     request,

@@ -1,10 +1,15 @@
-import { data, Outlet } from 'react-router';
+import { Outlet } from 'react-router';
+import { cloudflareContext } from '~/context';
 import { getSupabaseServerClient } from '~/lib/supabase.server';
 import type { Route } from './+types/admin';
 
-export async function loader({ request, context }: Route.LoaderArgs) {
+const authMiddleware: Route.MiddlewareFunction = async ({
+  request,
+  context,
+}) => {
   const responseHeaders = new Headers();
-  const { SUPABASE_ANON_KEY, SUPABASE_URL } = context.cloudflare.env;
+  const { SUPABASE_ANON_KEY, SUPABASE_URL } =
+    context.get(cloudflareContext).env;
 
   const supabase = await getSupabaseServerClient({
     request,
@@ -16,11 +21,11 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   const user = await supabase.auth.getUser();
 
   if (!user.data.user) {
-    throw new Response('Unauthorized', { status: 401 });
+    throw new Response('Not Found', { status: 404 });
   }
+};
 
-  return data({ user: user.data.user }, { headers: responseHeaders });
-}
+export const middleware: Route.MiddlewareFunction[] = [authMiddleware];
 
 export default function Admin() {
   return (

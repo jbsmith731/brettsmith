@@ -7,6 +7,7 @@ import { Form, redirect, useActionData } from 'react-router';
 import z from 'zod';
 import { Button } from '~/components/ds/Button';
 import { Input } from '~/components/ds/Input';
+import { cloudflareContext } from '~/context';
 import { getSupabaseServerClient } from '~/lib/supabase.server';
 import type { Route } from './+types/login';
 
@@ -14,7 +15,8 @@ export async function action({ request, context }: Route.ActionArgs) {
   const responseHeaders = new Headers();
   const formData = await request.formData();
 
-  const { SUPABASE_ANON_KEY, SUPABASE_URL } = context.cloudflare.env;
+  const { SUPABASE_ANON_KEY, SUPABASE_URL } =
+    context.get(cloudflareContext).env;
 
   try {
     const validatedData = await serverValidate(formData);
