@@ -6,6 +6,8 @@ export default [
   route('/login', 'routes/login.tsx'),
 
   // Protected routes
-  route('/admin', 'routes/admin/admin.tsx'),
+  route('/admin', 'routes/admin/admin.tsx', [
+    index('routes/admin/admin-bookmarks.tsx'),
+  ]),
   route('*', 'routes/not-found.tsx'),
 ] satisfies RouteConfig;
