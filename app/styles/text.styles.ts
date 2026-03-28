@@ -52,7 +52,7 @@ export const heading = cva('tracking-tight', {
   },
   defaultVariants: {
     level: 'h2',
-    weight: 'semibold',
+    weight: 'regular',
     color: 'primary',
   },
 });
