@@ -1,5 +1,5 @@
-import { label } from '@/styles/text';
 import { twMerge } from 'tailwind-merge';
+import { label } from '~/styles/text.styles';
 
 export function Field({
   children,

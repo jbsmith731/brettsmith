@@ -9,7 +9,7 @@ export function Input({ className, ...rest }: InputProps) {
         [
           'flex h-10 w-full rounded-md px-3 text-sm',
           'bg-surface text-text-primary placeholder:text-text-muted',
-          'border border-border/60',
+          'border border-border',
           'transition-colors duration-150',
 
           // hover

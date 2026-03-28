@@ -6,9 +6,11 @@ import {
 import { Form, redirect, useActionData } from 'react-router';
 import z from 'zod';
 import { Button } from '~/components/ds/Button';
+import { FieldInfo } from '~/components/ds/FieldInfo';
 import { Input } from '~/components/ds/Input';
 import { cloudflareContext } from '~/context';
 import { getSupabaseServerClient } from '~/lib/supabase.server';
+import { heading } from '~/styles/text.styles';
 import type { Route } from './+types/login';
 
 export async function action({ request, context }: Route.ActionArgs) {
@@ -48,22 +50,18 @@ export async function action({ request, context }: Route.ActionArgs) {
 
 export default function Login() {
   const actionData = useActionData<typeof action>();
-  console.log({ actionData });
 
   const form = useForm({
     ...loginOptions,
-    // transform: useTransform(
-    //   (baseForm) => mergeForm(baseForm, actionData ?? {}),
-    //   [actionData],
-    // ),
+    validators: {
+      onSubmit: LoginSchema,
+    },
   });
 
-  console.log(form.state);
-
   return (
-    <div className="container">
-      <div className="mx-auto max-w-sm">
-        <h1>Login</h1>
+    <div className="container grid min-h-full place-items-center">
+      <div className="mx-auto max-w-sm w-full grid gap-6">
+        <h1 className={heading({ level: 'h3', weight: 'regular' })}>Login</h1>
 
         <Form
           className="grid gap-4"
@@ -73,26 +71,34 @@ export default function Login() {
           <form.Field name="email">
             {(field) => {
               return (
-                <Input
-                  name={field.name}
-                  type="email"
-                  placeholder="Email"
-                  value={field.state.value}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                />
+                <div>
+                  <Input
+                    name={field.name}
+                    type="email"
+                    placeholder="john.doe@example.com"
+                    value={field.state.value}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    aria-invalid={!field.state.meta.isValid}
+                  />
+                  <FieldInfo field={field} />
+                </div>
               );
             }}
           </form.Field>
           <form.Field name="password">
             {(field) => {
               return (
-                <Input
-                  name={field.name}
-                  type="password"
-                  placeholder="Password"
-                  value={field.state.value}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                />
+                <div>
+                  <Input
+                    name={field.name}
+                    type="password"
+                    placeholder="Enter your password"
+                    value={field.state.value}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    aria-invalid={!field.state.meta.isValid}
+                  />
+                  <FieldInfo field={field} />
+                </div>
               );
             }}
           </form.Field>
