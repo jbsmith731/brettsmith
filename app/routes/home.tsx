@@ -49,7 +49,11 @@ export default function Home() {
                         <div className="absolute -left-2.75 top-2.25 size-1 rounded-full bg-accent" />
                       )}
 
-                      <p className={text({ className: 'leading-snug' })}>
+                      <p
+                        className={text({
+                          className: 'leading-snug text-pretty',
+                        })}
+                      >
                         {update}
                         {suffix && (
                           <>
@@ -110,6 +114,15 @@ const UPDATES_V2: Updates[] = [
   {
     year: 2025,
     updates: [
+      {
+        update:
+          'Launch BreakLine internal browser extension for candidate sourcing and outreach',
+        type: UPDATE_TYPE.PROJECT,
+      },
+      {
+        update: 'Launch improved BreakLine application error handling',
+        type: UPDATE_TYPE.PROJECT,
+      },
       {
         update: 'New role as Senior Frontend Engineer at BreakLine',
         type: UPDATE_TYPE.ROLE,
