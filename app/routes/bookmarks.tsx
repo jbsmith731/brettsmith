@@ -14,11 +14,13 @@ export function headers() {
 
 export async function loader({ request, context }: Route.LoaderArgs) {
   const responseHeaders = new Headers();
+  const { SUPABASE_ANON_KEY, SUPABASE_URL } = context.cloudflare.env;
+
   const supabase = getSupabaseServerClient({
     request,
     headers: responseHeaders,
-    supabaseUrl: context.cloudflare.env.SUPABASE_URL,
-    supabaseAnonKey: context.cloudflare.env.SUPABASE_ANON_KEY,
+    supabaseUrl: SUPABASE_URL,
+    supabaseAnonKey: SUPABASE_ANON_KEY,
   });
 
   const { data: bookmarks } = await supabase
