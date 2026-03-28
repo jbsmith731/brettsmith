@@ -3,11 +3,11 @@ import {
   createServerValidate,
   ServerValidateError,
 } from '@tanstack/react-form-remix';
-import { Form, redirect, useActionData } from 'react-router';
+import { Form, redirect } from 'react-router';
 import z from 'zod';
 import { Button } from '~/components/ds/Button';
 import { Field, FieldInfo, Label } from '~/components/ds/Field';
-import { Input } from '~/components/ds/Input';
+import { getInputProps, Input } from '~/components/ds/Input';
 import { cloudflareContext } from '~/context';
 import { createMetaTitle } from '~/helpers/seo.helpers';
 import { getSupabaseServerClient } from '~/lib/supabase.server';
@@ -50,8 +50,6 @@ export async function action({ request, context }: Route.ActionArgs) {
 }
 
 export default function Login() {
-  const actionData = useActionData<typeof action>();
-
   const form = useForm({
     ...loginOptions,
     validators: {
@@ -62,8 +60,10 @@ export default function Login() {
   return (
     <>
       <title>{createMetaTitle('Login')}</title>
+      <meta name="robots" content="noindex, nofollow" />
+
       <main className="container grid min-h-full place-items-center">
-        <div className="mx-auto max-w-sm w-full grid gap-6">
+        <div className="mx-auto max-w-sm w-full grid gap-5">
           <h1 className={heading({ level: 'h3', weight: 'regular' })}>Login</h1>
 
           <Form
@@ -77,13 +77,9 @@ export default function Login() {
                   <Field>
                     <Label htmlFor={field.name}>Email</Label>
                     <Input
-                      id={field.name}
-                      name={field.name}
+                      {...getInputProps(field)}
                       type="email"
                       placeholder="john.doe@example.com"
-                      value={field.state.value}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      aria-invalid={!field.state.meta.isValid}
                     />
                     <FieldInfo field={field} />
                   </Field>
@@ -96,20 +92,18 @@ export default function Login() {
                   <Field>
                     <Label htmlFor={field.name}>Password</Label>
                     <Input
-                      id={field.name}
-                      name={field.name}
+                      {...getInputProps(field)}
                       type="password"
                       placeholder="Enter your password"
-                      value={field.state.value}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      aria-invalid={!field.state.meta.isValid}
                     />
                     <FieldInfo field={field} />
                   </Field>
                 );
               }}
             </form.Field>
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={form.state.isSubmitting}>
+              Login
+            </Button>
           </Form>
         </div>
       </main>
@@ -138,6 +132,6 @@ const serverValidate = createServerValidate({
 });
 
 const LoginSchema = z.object({
-  email: z.email(),
-  password: z.string().min(1),
+  email: z.email({ message: 'Invalid email address' }),
+  password: z.string().min(1, { message: 'Password is required' }),
 });

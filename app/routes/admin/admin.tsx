@@ -29,10 +29,14 @@ export const middleware: Route.MiddlewareFunction[] = [authMiddleware];
 
 export default function Admin() {
   return (
-    <div className="container">
-      <h1>Admin</h1>
+    <>
+      <meta name="robots" content="noindex, nofollow" />
 
-      <Outlet />
-    </div>
+      <div className="container">
+        <h1>Admin</h1>
+
+        <Outlet />
+      </div>
+    </>
   );
 }
