@@ -1,5 +1,5 @@
+import { type AnyFieldApi } from '@tanstack/react-form';
 import { twMerge } from 'tailwind-merge';
-import { label } from '~/styles/text.styles';
 
 export function Field({
   children,
@@ -14,8 +14,34 @@ export function Field({
 }
 
 export function Label({
+  children,
   className,
   ...rest
-}: React.ComponentPropsWithRef<'label'>) {
-  return <label className={twMerge('block', label, className)} {...rest} />;
+}: React.ComponentPropsWithoutRef<'label'>) {
+  return (
+    <label
+      className={twMerge(
+        'block font-mono font-medium text-xs uppercase text-text-muted tracking-wide',
+        className,
+      )}
+      {...rest}
+    >
+      {children}
+    </label>
+  );
+}
+
+export function FieldInfo({ field }: { field: AnyFieldApi }) {
+  const { isTouched, isValid, errors, isValidating } = field.state.meta;
+  return (
+    <>
+      {isTouched && !isValid ? (
+        <small className="text-error font-medium text-sm">
+          {errors.map((err) => err.message).join(',')}
+        </small>
+      ) : null}
+
+      {isValidating ? 'Validating...' : null}
+    </>
+  );
 }

@@ -6,9 +6,10 @@ import {
 import { Form, redirect, useActionData } from 'react-router';
 import z from 'zod';
 import { Button } from '~/components/ds/Button';
-import { FieldInfo } from '~/components/ds/FieldInfo';
+import { Field, FieldInfo, Label } from '~/components/ds/Field';
 import { Input } from '~/components/ds/Input';
 import { cloudflareContext } from '~/context';
+import { createMetaTitle } from '~/helpers/seo.helpers';
 import { getSupabaseServerClient } from '~/lib/supabase.server';
 import { heading } from '~/styles/text.styles';
 import type { Route } from './+types/login';
@@ -59,53 +60,60 @@ export default function Login() {
   });
 
   return (
-    <div className="container grid min-h-full place-items-center">
-      <div className="mx-auto max-w-sm w-full grid gap-6">
-        <h1 className={heading({ level: 'h3', weight: 'regular' })}>Login</h1>
+    <>
+      <title>{createMetaTitle('Login')}</title>
+      <main className="container grid min-h-full place-items-center">
+        <div className="mx-auto max-w-sm w-full grid gap-6">
+          <h1 className={heading({ level: 'h3', weight: 'regular' })}>Login</h1>
 
-        <Form
-          className="grid gap-4"
-          method="POST"
-          onSubmit={() => form.handleSubmit()}
-        >
-          <form.Field name="email">
-            {(field) => {
-              return (
-                <div>
-                  <Input
-                    name={field.name}
-                    type="email"
-                    placeholder="john.doe@example.com"
-                    value={field.state.value}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    aria-invalid={!field.state.meta.isValid}
-                  />
-                  <FieldInfo field={field} />
-                </div>
-              );
-            }}
-          </form.Field>
-          <form.Field name="password">
-            {(field) => {
-              return (
-                <div>
-                  <Input
-                    name={field.name}
-                    type="password"
-                    placeholder="Enter your password"
-                    value={field.state.value}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    aria-invalid={!field.state.meta.isValid}
-                  />
-                  <FieldInfo field={field} />
-                </div>
-              );
-            }}
-          </form.Field>
-          <Button type="submit">Submit</Button>
-        </Form>
-      </div>
-    </div>
+          <Form
+            className="grid gap-4"
+            method="POST"
+            onSubmit={() => form.handleSubmit()}
+          >
+            <form.Field name="email">
+              {(field) => {
+                return (
+                  <Field>
+                    <Label htmlFor={field.name}>Email</Label>
+                    <Input
+                      id={field.name}
+                      name={field.name}
+                      type="email"
+                      placeholder="john.doe@example.com"
+                      value={field.state.value}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      aria-invalid={!field.state.meta.isValid}
+                    />
+                    <FieldInfo field={field} />
+                  </Field>
+                );
+              }}
+            </form.Field>
+            <form.Field name="password">
+              {(field) => {
+                return (
+                  <Field>
+                    <Label htmlFor={field.name}>Password</Label>
+                    <Input
+                      id={field.name}
+                      name={field.name}
+                      type="password"
+                      placeholder="Enter your password"
+                      value={field.state.value}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      aria-invalid={!field.state.meta.isValid}
+                    />
+                    <FieldInfo field={field} />
+                  </Field>
+                );
+              }}
+            </form.Field>
+            <Button type="submit">Submit</Button>
+          </Form>
+        </div>
+      </main>
+    </>
   );
 }
 

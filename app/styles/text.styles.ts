@@ -59,7 +59,7 @@ export const heading = cva('tracking-tight', {
 
 export type HeadingVariants = VariantProps<typeof heading>;
 
-export const label = 'text-xs uppercase tracking-widest';
+export const label = 'font-mono text-xs uppercase tracking-wider';
 
 export const linkText = cva('transition-colors underline-offset-4', {
   variants: {
