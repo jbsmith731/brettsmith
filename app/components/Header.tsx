@@ -27,7 +27,7 @@ export default function Header() {
                   linkText({
                     color: 'primary',
                   }),
-                  'aria-[current]:line-through decoration-accent',
+                  'aria-[current]:line-through decoration-accent decoration-[1.5px]',
                 )}
                 prefetch="intent"
               >
