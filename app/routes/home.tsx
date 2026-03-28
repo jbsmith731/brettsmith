@@ -120,10 +120,6 @@ const UPDATES_V2: Updates[] = [
         type: UPDATE_TYPE.PROJECT,
       },
       {
-        update: 'Launch improved BreakLine application error handling',
-        type: UPDATE_TYPE.PROJECT,
-      },
-      {
         update: 'New role as Senior Frontend Engineer at BreakLine',
         type: UPDATE_TYPE.ROLE,
       },
