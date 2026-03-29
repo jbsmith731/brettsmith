@@ -6,6 +6,7 @@ import { DialogClose } from '~/components/Dialog';
 import { Button } from '~/components/ds/Button';
 import { Field, FieldInfo, Label } from '~/components/ds/Field';
 import { getInputProps, Input } from '~/components/ds/Input';
+import { getTextareaProps, Textarea } from '~/components/ds/Textarea';
 
 interface BookmarkFormProps extends Omit<FormProps, 'onSubmit'> {
   className?: string;
@@ -57,9 +58,8 @@ export function BookmarkForm({ className, ...rest }: BookmarkFormProps) {
         {(field) => (
           <Field>
             <Label htmlFor={field.name}>Description</Label>
-            <Input
-              {...getInputProps(field)}
-              type="text"
+            <Textarea
+              {...getTextareaProps(field)}
               placeholder="A short description"
             />
             <FieldInfo field={field} />
