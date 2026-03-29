@@ -1,5 +1,5 @@
 import { createServerValidate } from '@tanstack/react-form-remix';
-import { data, useLoaderData } from 'react-router';
+import { data, useFetcher, useLoaderData } from 'react-router';
 import z from 'zod';
 import {
   DialogBackdrop,
@@ -9,7 +9,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '~/components/Dialog';
+import {
+  DropdownMenuItem,
+  DropdownMenuPopup,
+  DropdownMenuPortal,
+  DropdownMenuPositioner,
+  DropdownMenuRoot,
+  DropdownMenuTrigger,
+} from '~/components/DropdownMenu';
 import { Button } from '~/components/ds/Button';
+import { Icon } from '~/components/Icon';
 import { Main } from '~/components/Main';
 import { cloudflareContext } from '~/context';
 import { getSupabaseServerClient } from '~/lib/supabase.server';
@@ -43,8 +52,8 @@ export async function loader({ request, context }: Route.LoaderArgs) {
 }
 
 export async function action({ request, context }: Route.ActionArgs) {
-  const formData = await request.formData();
   const responseHeaders = new Headers();
+  const formData = await request.formData();
 
   const { SUPABASE_ANON_KEY, SUPABASE_URL } =
     context.get(cloudflareContext).env;
@@ -59,25 +68,31 @@ export async function action({ request, context }: Route.ActionArgs) {
   switch (request.method) {
     case 'POST': {
       const result = await bookmarkServerValidate(formData);
-      console.log({ create: result });
-      break;
+
+      const post = await supabase.from('Bookmarks').insert({
+        title: result.title,
+        url: result.url,
+        description: result.description,
+      });
+
+      return data({ post }, { headers: responseHeaders });
     }
     case 'PATCH': {
       const result = await bookmarkServerValidate(formData);
       console.log({ update: result });
       break;
     }
-    case 'DELETE': {
-      console.log('Delete bookmark');
-      break;
-    }
     default:
-      throw new Response('Method Not Allowed', { status: 405 });
+      throw new Response('Method Not Allowed', {
+        status: 405,
+        headers: responseHeaders,
+      });
   }
 }
 
 export default function Bookmarks() {
   const { bookmarks } = useLoaderData<typeof loader>();
+  const fetcher = useFetcher();
 
   return (
     <Main className="container grid gap-12">
@@ -100,7 +115,7 @@ export default function Bookmarks() {
 
       <ul className="grid gap-4 md:gap-8">
         {bookmarks?.map((bookmark) => (
-          <li key={bookmark.id} className="flex gap-2 justify-between">
+          <li key={bookmark.id} className="flex gap-5 justify-between">
             <div className="grid gap-0.5">
               <h2 className={heading({ level: 'h5' })}>{bookmark.title}</h2>
               <p
@@ -113,9 +128,23 @@ export default function Bookmarks() {
               </p>
             </div>
 
-            {/* <Button variant="ghost" size="button" className="shrink-0">
-              <Icon name="more-2-line" />
-            </Button> */}
+            <DropdownMenuRoot>
+              <DropdownMenuTrigger
+                render={
+                  <Button variant="ghost" size="icon" className="shrink-0">
+                    <Icon name="more-2-line" />
+                  </Button>
+                }
+              />
+              <DropdownMenuPortal>
+                <DropdownMenuPositioner align="end" sideOffset={4}>
+                  <DropdownMenuPopup>
+                    <DropdownMenuItem>Edit</DropdownMenuItem>
+                    <DropdownMenuItem>Delete</DropdownMenuItem>
+                  </DropdownMenuPopup>
+                </DropdownMenuPositioner>
+              </DropdownMenuPortal>
+            </DropdownMenuRoot>
           </li>
         ))}
       </ul>
