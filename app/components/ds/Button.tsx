@@ -66,6 +66,7 @@ export const buttonVariants = cva(
         default: 'h-10 px-4 text-sm',
         lg: 'h-12 px-6 text-base',
         auto: [],
+        icon: 'size-8',
       },
     },
     defaultVariants: {

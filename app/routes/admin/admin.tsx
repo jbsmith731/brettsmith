@@ -1,4 +1,5 @@
 import { Form, Outlet } from 'react-router';
+import { IconSprite } from '~/components/Icon';
 import { cloudflareContext } from '~/context';
 import { getSupabaseServerClient } from '~/lib/supabase.server';
 import { label } from '~/styles/text.styles';
@@ -61,6 +62,8 @@ export default function Admin() {
   return (
     <div>
       <meta name="robots" content="noindex, nofollow" />
+
+      <IconSprite />
 
       <div className="border-y py-2 border-border">
         <div className="container flex items-center justify-between text-sm font-mono">

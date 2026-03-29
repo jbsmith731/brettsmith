@@ -48,7 +48,9 @@ export default function Bookmarks() {
               </p>
             </div>
 
-            <div>...</div>
+            {/* <Button variant="ghost" size="button" className="shrink-0">
+              <Icon name="more-2-line" />
+            </Button> */}
           </li>
         ))}
       </ul>
