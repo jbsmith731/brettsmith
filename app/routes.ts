@@ -7,7 +7,7 @@ export default [
 
   // Protected routes
   route('/admin', 'routes/admin/admin.tsx', [
-    index('routes/admin/admin-bookmarks.tsx'),
+    index('routes/admin-bookmarks/admin-bookmarks.tsx'),
   ]),
   route('*', 'routes/not-found.tsx'),
 ] satisfies RouteConfig;
