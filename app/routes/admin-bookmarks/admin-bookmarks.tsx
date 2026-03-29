@@ -42,6 +42,40 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   return data({ bookmarks }, { headers: responseHeaders });
 }
 
+export async function action({ request, context }: Route.ActionArgs) {
+  const formData = await request.formData();
+  const responseHeaders = new Headers();
+
+  const { SUPABASE_ANON_KEY, SUPABASE_URL } =
+    context.get(cloudflareContext).env;
+
+  const supabase = await getSupabaseServerClient({
+    request,
+    headers: responseHeaders,
+    supabaseUrl: SUPABASE_URL,
+    supabaseAnonKey: SUPABASE_ANON_KEY,
+  });
+
+  switch (request.method) {
+    case 'POST': {
+      const result = await bookmarkServerValidate(formData);
+      console.log({ create: result });
+      break;
+    }
+    case 'PATCH': {
+      const result = await bookmarkServerValidate(formData);
+      console.log({ update: result });
+      break;
+    }
+    case 'DELETE': {
+      console.log('Delete bookmark');
+      break;
+    }
+    default:
+      throw new Response('Method Not Allowed', { status: 405 });
+  }
+}
+
 export default function Bookmarks() {
   const { bookmarks } = useLoaderData<typeof loader>();
 
