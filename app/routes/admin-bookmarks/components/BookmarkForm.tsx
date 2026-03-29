@@ -10,11 +10,20 @@ import { getTextareaProps, Textarea } from '~/components/ds/Textarea';
 
 interface BookmarkFormProps extends Omit<FormProps, 'onSubmit'> {
   className?: string;
+  bookmark?: Partial<BookmarkInput>;
 }
 
-export function BookmarkForm({ className, ...rest }: BookmarkFormProps) {
+export function BookmarkForm({
+  className,
+  bookmark,
+  ...rest
+}: BookmarkFormProps) {
   const form = useForm({
     ...bookmarkOptions,
+    defaultValues: {
+      ...bookmarkOptions.defaultValues,
+      ...bookmark,
+    },
     validators: {
       onSubmit: BookmarkSchema,
     },
@@ -26,6 +35,9 @@ export function BookmarkForm({ className, ...rest }: BookmarkFormProps) {
       className={twMerge('grid gap-4', className)}
       onSubmit={() => form.handleSubmit()}
     >
+      <form.Field name="id">
+        {(field) => <Input {...getInputProps(field)} type="hidden" />}
+      </form.Field>
       <form.Field name="title">
         {(field) => (
           <Field>
@@ -85,6 +97,7 @@ export function BookmarkForm({ className, ...rest }: BookmarkFormProps) {
 
 export const bookmarkOptions = formOptions({
   defaultValues: {
+    id: '',
     title: '',
     url: '',
     description: '',
@@ -92,9 +105,19 @@ export const bookmarkOptions = formOptions({
 });
 
 export const BookmarkSchema = z.object({
+  id: z
+    .string()
+    .transform((val) => (val ? parseInt(val, 10) : undefined))
+    .pipe(z.number().optional()),
   title: z.string().min(1, { message: 'Title is required' }),
   url: z
     .url({ message: 'A valid URL is required' })
     .min(1, { message: 'URL is required' }),
-  description: z.string(),
+  description: z
+    .string()
+    .transform((val) => val || undefined)
+    .pipe(z.string().optional()),
 });
+
+type BookmarkInput = z.input<typeof BookmarkSchema>;
+type BookmarkOutput = z.output<typeof BookmarkSchema>;

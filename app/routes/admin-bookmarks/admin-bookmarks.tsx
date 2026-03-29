@@ -35,7 +35,7 @@ export async function loader({ request, context }: Route.LoaderArgs) {
 
   const { data: bookmarks } = await supabase
     .from('Bookmarks')
-    .select('title, url, description')
+    .select('title, url, description, id')
     .order('id', { ascending: false })
     .limit(100);
 
@@ -66,7 +66,7 @@ export default function Bookmarks() {
 
       <ul className="grid gap-4 md:gap-8">
         {bookmarks?.map((bookmark) => (
-          <li key={bookmark.url} className="flex gap-2 justify-between">
+          <li key={bookmark.id} className="flex gap-2 justify-between">
             <div className="grid gap-0.5">
               <h2 className={heading({ level: 'h5' })}>{bookmark.title}</h2>
               <p
