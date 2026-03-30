@@ -96,6 +96,14 @@ button {
   @apply cursor-pointer;
 }
 
+/*
+ * Base UI
+ * https://base-ui.com/react/overview/quick-start#portals
+ */
+.root {
+  isolate: isolate;
+}
+
 @utility link-box {
   position: relative;
 
