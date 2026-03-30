@@ -127,6 +127,10 @@ const UPDATES_V2: Updates[] = [
         update: "Launch internal Figma plugin for Audible's marketing team",
         type: UPDATE_TYPE.PROJECT,
       },
+      {
+        update: 'Launch real-time queue status updates in the BDG web app',
+        type: UPDATE_TYPE.PROJECT,
+      },
     ],
   },
   {
