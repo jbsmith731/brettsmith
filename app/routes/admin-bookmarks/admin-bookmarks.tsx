@@ -1,4 +1,5 @@
 import { createServerValidate } from '@tanstack/react-form-remix';
+import * as React from 'react';
 import { data, useFetcher, useLoaderData } from 'react-router';
 import z from 'zod';
 import {
@@ -79,8 +80,18 @@ export async function action({ request, context }: Route.ActionArgs) {
     }
     case 'PATCH': {
       const result = await bookmarkServerValidate(formData);
-      console.log({ update: result });
-      break;
+
+      const patch = await supabase
+        .from('Bookmarks')
+        .update({
+          title: result.title,
+          url: result.url,
+          description: result.description,
+        })
+        .eq('id', Number(result.id))
+        .select();
+
+      return data({ patch }, { headers: responseHeaders });
     }
     default:
       throw new Response('Method Not Allowed', {
@@ -115,40 +126,85 @@ export default function Bookmarks() {
 
       <ul className="grid gap-4 md:gap-8">
         {bookmarks?.map((bookmark) => (
-          <li key={bookmark.id} className="flex gap-5 justify-between">
-            <div className="grid gap-0.5">
-              <h2 className={heading({ level: 'h5' })}>{bookmark.title}</h2>
-              <p
-                className={text({
-                  color: 'secondary',
-                  className: 'max-sm:leading-snug',
-                })}
-              >
-                {bookmark.description}
-              </p>
-            </div>
-
-            <DropdownMenuRoot>
-              <DropdownMenuTrigger
-                render={
-                  <Button variant="ghost" size="icon" className="shrink-0">
-                    <Icon name="more-2-line" />
-                  </Button>
-                }
-              />
-              <DropdownMenuPortal>
-                <DropdownMenuPositioner align="end" sideOffset={4}>
-                  <DropdownMenuPopup>
-                    <DropdownMenuItem>Edit</DropdownMenuItem>
-                    <DropdownMenuItem>Delete</DropdownMenuItem>
-                  </DropdownMenuPopup>
-                </DropdownMenuPositioner>
-              </DropdownMenuPortal>
-            </DropdownMenuRoot>
-          </li>
+          <BookmarkItem key={bookmark.id} bookmark={bookmark} />
         ))}
       </ul>
     </Main>
+  );
+}
+
+function BookmarkItem({ bookmark }: { bookmark: any }) {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <li key={bookmark.id} className="flex gap-5 justify-between">
+      <div className="grid gap-0.5">
+        <h2 className={heading({ level: 'h5' })}>{bookmark.title}</h2>
+        <p
+          className={text({
+            color: 'secondary',
+            className: 'max-sm:leading-snug',
+          })}
+        >
+          {bookmark.description}
+        </p>
+      </div>
+
+      <DropdownMenuRoot>
+        <DropdownMenuTrigger
+          render={
+            <Button variant="ghost" size="icon" className="shrink-0">
+              <Icon name="more-2-line" />
+            </Button>
+          }
+        />
+        <DropdownMenuPortal>
+          <DropdownMenuPositioner align="end" sideOffset={4}>
+            <DropdownMenuPopup>
+              <DropdownMenuItem onClick={() => setOpen(true)}>
+                Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem>Delete</DropdownMenuItem>
+            </DropdownMenuPopup>
+          </DropdownMenuPositioner>
+        </DropdownMenuPortal>
+      </DropdownMenuRoot>
+
+      <EditBookmarkDialog open={open} setOpen={setOpen}>
+        <BookmarkForm
+          method="patch"
+          bookmark={{
+            ...bookmark,
+            id: bookmark.id.toString(),
+            description: bookmark.description ?? undefined,
+          }}
+        />
+      </EditBookmarkDialog>
+    </li>
+  );
+}
+
+interface EditBookmarkDialogProps {
+  open?: boolean;
+  setOpen?: (open: boolean) => void;
+  children: React.ReactNode;
+}
+
+function EditBookmarkDialog({
+  open,
+  setOpen,
+  children,
+}: EditBookmarkDialogProps) {
+  return (
+    <DialogRoot open={open} onOpenChange={setOpen}>
+      <DialogPortal>
+        <DialogBackdrop />
+        <DialogPopup className="grid gap-5">
+          <DialogTitle>Edit Bookmark</DialogTitle>
+          {children}
+        </DialogPopup>
+      </DialogPortal>
+    </DialogRoot>
   );
 }
 

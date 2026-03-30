@@ -10,7 +10,7 @@ import { getTextareaProps, Textarea } from '~/components/ds/Textarea';
 
 interface BookmarkFormProps extends Omit<FormProps, 'onSubmit'> {
   className?: string;
-  bookmark?: Partial<BookmarkInput>;
+  bookmark?: Partial<BookmarkFormInput>;
 }
 
 export function BookmarkForm({
@@ -119,5 +119,5 @@ export const BookmarkSchema = z.object({
     .pipe(z.string().optional()),
 });
 
-type BookmarkInput = z.input<typeof BookmarkSchema>;
-type BookmarkOutput = z.output<typeof BookmarkSchema>;
+export type BookmarkFormInput = z.input<typeof BookmarkSchema>;
+export type BookmarkFormOutput = z.output<typeof BookmarkSchema>;
