@@ -1,6 +1,6 @@
 import { createServerValidate } from '@tanstack/react-form-remix';
 import * as React from 'react';
-import { data, useLoaderData, useNavigation } from 'react-router';
+import { data, useFetcher, useLoaderData, useNavigation } from 'react-router';
 import z from 'zod';
 import {
   DialogBackdrop,
@@ -146,6 +146,7 @@ function BookmarkItem({ bookmark }: { bookmark: any }) {
   const [open, setOpen] = React.useState(false);
   const { state, formMethod } = useNavigation();
   const isUpdating = state === 'submitting' && formMethod === 'PATCH';
+  const fetcher = useFetcher();
 
   React.useEffect(() => {
     if (!isUpdating) {
@@ -181,7 +182,16 @@ function BookmarkItem({ bookmark }: { bookmark: any }) {
               <DropdownMenuItem onClick={() => setOpen(true)}>
                 Edit
               </DropdownMenuItem>
-              <DropdownMenuItem>Delete</DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() =>
+                  fetcher.submit(null, {
+                    method: 'DELETE',
+                    action: `/admin/bookmarks/${bookmark.id}`,
+                  })
+                }
+              >
+                Delete
+              </DropdownMenuItem>
             </DropdownMenuPopup>
           </DropdownMenuPositioner>
         </DropdownMenuPortal>
