@@ -1,6 +1,6 @@
 import { createServerValidate } from '@tanstack/react-form-remix';
 import * as React from 'react';
-import { data, useFetcher, useLoaderData } from 'react-router';
+import { data, useLoaderData, useNavigation } from 'react-router';
 import z from 'zod';
 import {
   DialogBackdrop,
@@ -103,14 +103,23 @@ export async function action({ request, context }: Route.ActionArgs) {
 
 export default function Bookmarks() {
   const { bookmarks } = useLoaderData<typeof loader>();
-  const fetcher = useFetcher();
+  const [createOpen, setCreateOpen] = React.useState(false);
+
+  const { state, formMethod } = useNavigation();
+  const isCreating = state === 'submitting' && formMethod === 'POST';
+
+  React.useEffect(() => {
+    if (!isCreating) {
+      setCreateOpen(false);
+    }
+  }, [isCreating]);
 
   return (
     <Main className="container grid gap-12">
       <div className="flex items-center justify-between">
         <h1 className={heading({ level: 'h1' })}>Bookmarks</h1>
 
-        <DialogRoot>
+        <DialogRoot open={createOpen} onOpenChange={setCreateOpen}>
           <DialogTrigger
             render={<Button variant="outline">Add Bookmark</Button>}
           />
@@ -135,6 +144,14 @@ export default function Bookmarks() {
 
 function BookmarkItem({ bookmark }: { bookmark: any }) {
   const [open, setOpen] = React.useState(false);
+  const { state, formMethod } = useNavigation();
+  const isUpdating = state === 'submitting' && formMethod === 'PATCH';
+
+  React.useEffect(() => {
+    if (!isUpdating) {
+      setOpen(false);
+    }
+  }, [isUpdating]);
 
   return (
     <li key={bookmark.id} className="flex gap-5 justify-between">
