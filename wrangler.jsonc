@@ -9,4 +9,10 @@
       "invocation_logs": true,
     },
   },
+  "routes": [
+    {
+      "pattern": "brettsmith.me",
+      "custom_domain": true,
+    },
+  ],
 }

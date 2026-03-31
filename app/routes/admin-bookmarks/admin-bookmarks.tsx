@@ -22,6 +22,7 @@ import { Button } from '~/components/ds/Button';
 import { Icon } from '~/components/Icon';
 import { Main } from '~/components/Main';
 import { cloudflareContext } from '~/context';
+import { createMetaTitle } from '~/helpers/seo.helpers';
 import { getSupabaseServerClient } from '~/lib/supabase.server';
 import { heading, text } from '~/styles/text.styles';
 import type { Route } from './+types/admin-bookmarks';
@@ -116,6 +117,7 @@ export default function Bookmarks() {
 
   return (
     <Main className="container grid gap-12">
+      <title>{createMetaTitle('Admin - Bookmarks')}</title>
       <div className="flex items-center justify-between">
         <h1 className={heading({ level: 'h1' })}>Bookmarks</h1>
 
