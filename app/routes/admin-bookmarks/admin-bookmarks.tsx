@@ -25,6 +25,7 @@ import { cloudflareContext } from '~/context';
 import { createMetaTitle } from '~/helpers/seo.helpers';
 import { getSupabaseServerClient } from '~/lib/supabase.server';
 import { heading, text } from '~/styles/text.styles';
+import type { Maybe } from '~/types/Maybe';
 import type { Route } from './+types/admin-bookmarks';
 import {
   BookmarkForm,
@@ -144,7 +145,18 @@ export default function Bookmarks() {
   );
 }
 
-function BookmarkItem({ bookmark }: { bookmark: any }) {
+interface Bookmark {
+  id: number;
+  title: string;
+  url: string;
+  description: Maybe<string>;
+}
+
+interface BookmarkItemProps {
+  bookmark: Bookmark;
+}
+
+function BookmarkItem({ bookmark }: BookmarkItemProps) {
   const [open, setOpen] = React.useState(false);
   const { state, formMethod } = useNavigation();
   const isUpdating = state === 'submitting' && formMethod === 'PATCH';
