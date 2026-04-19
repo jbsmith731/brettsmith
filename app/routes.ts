@@ -10,5 +10,4 @@ export default [
     index('routes/admin-bookmarks/admin-bookmarks.tsx'),
     route('bookmarks/:id', 'routes/admin-bookmarks/bookmark-detail.tsx'),
   ]),
-  route('*', 'routes/not-found.tsx'),
 ] satisfies RouteConfig;
