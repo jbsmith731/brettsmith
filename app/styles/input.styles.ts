@@ -1,5 +1,5 @@
 export const inputBase = [
-  'w-full rounded-md px-3 text-sm',
+  'w-full rounded-md px-3 text-base',
   'bg-surface text-text-primary placeholder:text-text-muted',
   'border border-border',
   'transition-colors duration-150',
