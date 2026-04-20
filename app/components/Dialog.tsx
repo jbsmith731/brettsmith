@@ -44,12 +44,19 @@ export function DialogPopup({ children, className, ...rest }: PopupProps) {
     <Dialog.Popup
       className={twMerge(
         'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
-        'bg-surface rounded-lg shadow-lg p-6 w-full max-w-md',
-        className,
+        'w-full p-4',
       )}
       {...rest}
     >
-      {children}
+      <div
+        className={twMerge(
+          'w-full max-w-md p-4 sm:p-6',
+          'bg-surface rounded-lg shadow-lg',
+          className,
+        )}
+      >
+        {children}
+      </div>
     </Dialog.Popup>
   );
 }
