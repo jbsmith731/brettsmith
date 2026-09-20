@@ -97,6 +97,14 @@ const UPDATES_V2: Updates[] = [
     year: 2026,
     updates: [
       {
+        update: 'New role as Senior Fullstack Engineer at ClearOne Advantage',
+        type: UPDATE_TYPE.ROLE,
+      },
+      {
+        update: 'Welcome to the world, Harrison James.',
+        type: UPDATE_TYPE.PROJECT,
+      },
+      {
         update: 'Launch improved BreakLine candidate invitation flow',
         type: UPDATE_TYPE.PROJECT,
       },
